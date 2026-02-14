@@ -29,3 +29,31 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.btn + .btn {
+    margin-left: .25rem;
+}
+
+h1.h3 {
+    letter-spacing: .2px;
+}
+
+
+.hero {
+    background: linear-gradient(135deg, rgba(13,110,253,.08), rgba(32,201,151,.08));
+    border: 1px solid rgba(0,0,0,.06);
+}
+
+[data-bs-theme="dark"] .hero {
+    background: linear-gradient(135deg, rgba(13,110,253,.18), rgba(32,201,151,.18));
+    border-color: rgba(255,255,255,.1);
+}
+
+
+.card.shadow-sm {
+    box-shadow: 0 .35rem 1rem rgba(0,0,0,.08) !important;
+}

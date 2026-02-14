@@ -1,50 +1,80 @@
 ﻿@model IEnumerable<MvcMovie.Models.Movie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Movies";
 }
 
-<h1>Movies List</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h3 m-0">Movies List</h1>
 
-<!-- Form البحث -->
-<form asp-controller="Movies" asp-action="Index" method="get">
-    <p>
-        Title:
-        <input type="text" name="searchString" value="@Context.Request.Query["searchString"]" class="form-control d-inline-block w-auto" />
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </p>
+    <a asp-action="Create" class="btn btn-success">
+        Create New
+    </a>
+</div>
+
+<!-- شريط بحث بسيط (GET) -->
+<form asp-controller="Movies" asp-action="Index" method="get" class="mb-3">
+    <div class="row g-2 align-items-center">
+        <div class="col-auto">
+            <label for="searchString" class="col-form-label fw-semibold">Title:</label>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <input type="text"
+                       id="searchString"
+                       name="searchString"
+                       value="@Context.Request.Query["searchString"]"
+                       class="form-control"
+                       placeholder="Search by title..." />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
 </form>
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
-</p>
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle m-0">
+            <thead class="table-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.First().Title)</th>
+                    <th>@Html.DisplayNameFor(m => m.First().ReleaseDate)</th>
+                    <th>@Html.DisplayNameFor(m => m.First().Genre)</th>
+                    <th class="text-end">@Html.DisplayNameFor(m => m.First().Price)</th>
+                    <th>@Html.DisplayNameFor(m => m.First().Rating)</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="fw-medium">@item.Title</td>
+                            <td>@item.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                            <td><span class="badge text-bg-secondary">@item.Genre</span></td>
+                            <td class="text-end">@item.Price.ToString("C")</td>
+                            <td>@item.Rating</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">No movies found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Title)</th>
-            <th>@Html.DisplayNameFor(model => model.ReleaseDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Genre)</th>
-            <th>@Html.DisplayNameFor(model => model.Price)</th>
-            <th>@Html.DisplayNameFor(model => model.Rating)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@item.ReleaseDate.ToString("yyyy-MM-dd")</td>
-                <td>@Html.DisplayFor(modelItem => item.Genre)</td>
-                <td>@item.Price.ToString("c")</td>
-                <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

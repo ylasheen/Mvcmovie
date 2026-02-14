@@ -1,8 +1,96 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero position-relative overflow-hidden rounded-4 p-4 p-md-5 mb-4">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <h1 class="display-5 fw-bold mb-3">
+                Welcome to <span class="text-primary">Movie App</span>
+            </h1>
+
+            <p class="lead text-body-secondary mb-4">
+                Manage your movie catalogue with clean CRUD, validation, and quick search.
+            </p>
+
+            <div class="d-flex flex-wrap gap-2">
+                <!-- أزرار شغّالة بالـTag Helpers -->
+                <a class="btn btn-primary" asp-controller="Movies" asp-action="Index">
+                    Explore Movies
+                </a>
+
+                <a class="btn btn-success" asp-controller="Movies" asp-action="Create">
+                    Start Adding
+                </a>
+
+                <a class="btn btn-outline-secondary"
+                   href="https://learn.microsoft.com/aspnet/core" target="_blank" rel="noopener">
+                    ASP.NET Core Docs
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="row text-center g-3">
+                        <div class="col-4">
+                            <div class="h2 mb-0 fw-bold text-primary">@DateTime.Now.Year</div>
+                            <div class="small text-body-secondary">Year</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="h2 mb-0 fw-bold text-primary">CRUD</div>
+                            <div class="small text-body-secondary">Ready</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="h2 mb-0 fw-bold text-primary">MVC</div>
+                            <div class="small text-body-secondary">Pattern</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="small text-body-secondary text-center mt-2">
+                Tip: Use the navbar to navigate between pages.
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Fast CRUD</h5>
+                    <p class="card-text text-body-secondary">
+                        Create, edit, delete, and validate movies smoothly.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Search &amp; Filter</h5>
+                    <p class="card-text text-body-secondary">
+                        Find titles quickly with a neat search bar on Movies.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Clean UI</h5>
+                    <p class="card-text text-body-secondary">
+                        Bootstrap-friendly layout that works with light/dark themes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
